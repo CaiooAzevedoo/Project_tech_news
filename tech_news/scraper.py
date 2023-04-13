@@ -1,6 +1,8 @@
 import requests
 from time import sleep
 from requests import HTTPError, ReadTimeout
+# from bs4 import BeautifulSoup
+from parsel import Selector
 
 
 # Requisito 1
@@ -17,7 +19,11 @@ def fetch(url):
 
 # Requisito 2
 def scrape_updates(html_content):
-    """Seu código deve vir aqui"""
+    urls = list()
+    selector = Selector(html_content)
+    for url in selector.css('h2.entry-title a::attr(href)'):
+        urls.append(url.get())
+    return urls
 
 
 # Requisito 3
