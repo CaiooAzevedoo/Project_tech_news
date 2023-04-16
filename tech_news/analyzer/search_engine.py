@@ -36,4 +36,9 @@ def search_by_date(date):
 
 # Requisito 9
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    news = find_news()
+    result = list()
+    for item in news:
+        if (category.upper() == item['category'].upper()):
+            result.append((item['title'], item['url']))
+    return result
